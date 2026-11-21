@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="#11192d" name="theme-color">
+    <meta content="Arlo Kharod" name="author">
+    <meta content="Arlo Kharod is a backend and full-stack software engineer in Lafayette, LA. C#/.NET, React, TypeScript, Azure, healthcare operations, and cloud-integrated workflows." name="description">
+    <link href="https://firegiant9000.github.io/" rel="canonical">
+    <link href="assets/favicon.svg" rel="icon" type="image/svg+xml">
+    <link href="styles.css" rel="stylesheet">
+    <meta content="website" property="og:type">
+    <meta content="Arlo Kharod | Backend &amp; Full-Stack Software Engineer" property="og:title">
+    <meta content="Full-time .NET and React experience in healthcare software, with inspectable project work." property="og:description">
+    <meta content="https://firegiant9000.github.io/" property="og:url">
+    <meta content="https://firegiant9000.github.io/assets/og.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <script type="application/ld+json">
+   {"@context":"https://schema.org","@type":"Person","name":"Arlo Kharod","jobTitle":"Software Engineer","url":"https://firegiant9000.github.io/","sameAs":["https://github.com/firegiant9000","https://www.linkedin.com/in/arlo-k-16a618273/"],"alumniOf":{"@type":"CollegeOrUniversity","name":"University of Louisiana at Lafayette"}}
+  </script>
+    <title>Arlo Kharod | Backend &amp; Full-Stack Software Engineer</title>
+    <meta content="Arlo Kharod | Backend &amp; Full-Stack Software Engineer" property="og:image:alt">
+    <meta content="1200" property="og:image:width">
+    <meta content="630" property="og:image:height">
+    <meta content="Arlo Kharod" property="og:site_name">
+    <meta content="Arlo Kharod | Backend &amp; Full-Stack Software Engineer" name="twitter:title">
+    <meta content="Full-time .NET and React experience in healthcare software, with inspectable project work." name="twitter:description">
+    <link href="assets/favicon-32.png" rel="icon" sizes="32x32" type="image/png">
+    <meta content="https://firegiant9000.github.io/assets/og.png" name="twitter:image">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+   Skip to content
+  </a>
+    <header class="site-header" id="top">
+      <div class="wrap nav-inner">
+        <a class="identity" href="#top">
+          <span aria-hidden="true" class="identity-mark">
+      ak
+      <span>
+       .
+      </span>
+          </span>
+          <span class="identity-label">
+      Arlo Kharod
+     </span>
+        </a>
+        <nav aria-label="Site navigation" class="nav-links">
+          <a href="#experience">
+      Experience
+     </a>
+          <a href="#projects">
+      Projects
+     </a>
+          <a href="#contact">
+      Contact
+     </a>
+        </nav>
+        <a class="nav-contact" href="assets/Arlo-Kharod-Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé (PDF)</a>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <section aria-labelledby="hero-title" class="hero">
+        <div class="wrap hero-layout">
+          <div class="hero-content">
+            <p class="eyebrow on-dark">Software engineer · .NET / React · Lafayette, LA</p>
+            <h1 id="hero-title">Arlo Kharod builds backend and full‑stack software.</h1>
+            <p class="hero-intro">I worked full-time at Adaptive Software from January 2025 through October 2026, including while finishing my B.S. in Computer Science, building .NET and React software for healthcare and operations teams.</p>
+            <p class="hero-detail">My work included per-patient order locking, patient signing workflows, and SQL-backed applications. I’m seeking .NET backend or full-stack roles, remote or around Lafayette.</p>
+            <div class="hero-actions">
+              <a class="button button-lime" href="assets/Arlo-Kharod-Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé (PDF, 1 page) <span aria-hidden="true">↗</span>
+              </a>
+              <a class="button button-outline" href="#projects">See projects <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+            <div class="hero-links">
+              <a href="https://github.com/firegiant9000" rel="noopener noreferrer" target="_blank">
+        GitHub
+        <span aria-hidden="true">
+         ↗
+        </span>
+              </a>
+              <a href="https://www.linkedin.com/in/arlo-k-16a618273/" rel="noopener noreferrer" target="_blank">
+        LinkedIn
+        <span aria-hidden="true">
+         ↗
+        </span>
+              </a>
+            </div>
+          </div>
+          <div aria-labelledby="lock-diagram-title" class="hero-system" role="group">
+            <div class="diagram-header">
+              <span>
+        Engineering Example
+       </span>
+              <span class="diagram-status">
+        Real-Time Order Locking
+       </span>
+            </div>
+            <h2 id="lock-diagram-title">
+       Preventing duplicate orders on a patient chart
+      </h2>
+            <div aria-label="React clients join a patient-chart SignalR group. A per-patient lock lives in a singleton on one API instance. The API checks whether another user holds the lock when creating, updating or submitting an order, returning HTTP 409 for conflicts." class="lock-diagram" role="img">
+              <div class="lock-node">
+                <span class="step">
+         01
+        </span>
+                <div>
+                  <small>
+          CLIENT
+         </small>
+                  <strong>
+          React patient chart
+         </strong>
+                </div>
+                <span class="node-pill">
+         presence
+        </span>
+              </div>
+              <span aria-hidden="true" class="flow-down">
+        ↓
+       </span>
+              <div class="lock-node hub-node">
+                <span class="step">
+         02
+        </span>
+                <div>
+                  <small>
+          REAL-TIME CHANNEL
+         </small>
+                  <strong>
+          SignalR chart group
+         </strong>
+                </div>
+                <span class="node-pill">
+         events
+        </span>
+              </div>
+              <span aria-hidden="true" class="flow-down">
+        ↓
+       </span>
+              <div class="lock-node">
+                <span class="step">
+         03
+        </span>
+                <div>
+                  <small>
+          SERVER-SIDE GUARD
+         </small>
+                  <strong>
+          Per-patient conflict check
+         </strong>
+                </div>
+                <span class="node-pill">
+         validation
+        </span>
+              </div>
+              <div class="lock-outcomes">
+                <div>
+                  <b class="outcome-ok">
+          No conflicting lock
+         </b>
+                  <span>
+          Continue order workflow
+         </span>
+                </div>
+                <div>
+                  <b class="outcome-warn">
+          Conflicting user
+         </b>
+                  <span>
+          HTTP 409 Conflict
+         </span>
+                </div>
+              </div>
+            </div>
+            <p class="diagram-caption">SignalR broadcasts chart presence and lock state; API checks reject conflicting writes while another user holds the lock. The lock lived on one API instance; multiple instances would need shared, atomic coordination.</p>
+          </div>
+        </div>
+        <ul class="wrap hero-stack">
+          <li>
+      .NET 8–10
+     </li>
+          <li>
+      ASP.NET Core
+     </li>
+          <li>
+      React / TypeScript
+     </li>
+          <li>
+      SQL Server
+     </li>
+          <li>
+      Azure
+     </li>
+          <li>PostgreSQL</li>
+        </ul>
+      </section>
+      <section aria-labelledby="experience-title" class="experience section" id="experience">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2 id="experience-title">
+        Experience
+       </h2>
+            </div>
+          </div>
+          <div class="experience-feature">
+            <div class="experience-side">
+              <span class="date-range">
+        Jan 2025 — Oct 2026
+       </span>
+              <h3>
+        Adaptive Software LLC
+       </h3>
+              <p>
+        Software Engineer · Full-time · Remote
+       </p>
+              <div class="experience-tags">
+                <span>
+         C# / .NET
+        </span>
+                <span>
+         React / TS
+        </span>
+                <span>
+         Azure
+        </span>
+                <span>
+         SQL Server
+        </span>
+              </div>
+            </div>
+            <div class="experience-main">
+              <p class="experience-intro">
+        I worked full-time on a remote team building healthcare and field-operations software, including patient-chart access controls, document workflows, and data integrations.
+       </p>
+              <ul class="achievement-list">
+                <li>
+                  <strong>Real-time order locking (shipped April 2026). </strong>Built per-patient order-creation locking across .NET and React, with SignalR chart presence and API conflict checks returning HTTP 409 when another user held a lock. Added release, reconnect and expiry handling; a teammate identified and fixed races during review, and I later hardened the lifecycle.</li>
+                <li>
+                  <strong>Patient signing and credential workflows. </strong>Implemented tokenized, rate-limited signing flows with validation, and reviewed endpoint authorization boundaries.</li>
+                <li>
+                  <strong>Offline field inspections. </strong>Implemented parts of a multi-tenant .NET API and React Native/SQLite sync foundation; transactional outbox and conflict handling let devices reconnect without assuming uninterrupted connectivity.</li>
+                <li>
+                  <strong>Privacy-aware telemetry. </strong>Worked on analytics events with a field allowlist for sensitive data, reusable .NET/TypeScript instrumentation, and access controls; the tradeoff was limiting telemetry detail to avoid collecting PHI.</li>
+                <li>
+                  <strong>Production workflow support. </strong>Maintained reporting and operational workflows for an operations/IVR system used by approximately 500 people. Helped make large imports resumable and added diagnostics and regression tests to make failures easier to identify and recover from.</li>
+              </ul>
+              <p class="case-home-link"><a class="case-link" href="case-studies/order-locking.html">Read the complete order-locking engineering case study <span aria-hidden="true">↗</span></a><span>Architecture, trade-offs, peer review and manual QA</span></p>
+            </div>
+          </div>
+          <div class="earlier-role">
+            <div>
+              <span class="date-range">
+        Jun — Aug 2024
+       </span>
+              <h3>
+        The Common Market
+       </h3>
+              <p>
+        Cybersecurity Contractor · Philadelphia, PA
+       </p>
+            </div>
+            <p>
+       Supported network-security planning and diagnostics, coordinated remediation priorities, and wrote internal documentation to make recurring work easier to follow.
+      </p>
+          </div>
+          <p class="education-note">B.S. Computer Science · Mathematics minor · University of Louisiana at Lafayette · May 2026</p>
+        </div>
+      </section>
+      <section aria-labelledby="projects-title" class="projects section" id="projects">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2 id="projects-title">Projects</h2>
+            </div>
+            <p>Four projects with source code. Each one explains the hard problem, the approach, and which parts I worked on.</p>
+          </div>
+          <p class="workflow-note"><strong>How I work:</strong> On personal projects, I use coding agents extensively and also write and debug code directly. I define requirements and design decisions, review generated changes, and verify behavior using tests and manual checks. I am responsible for what ships.</p>
+          <div class="project-cards">
+            <article aria-labelledby="tome-title" class="project-card project-card-featured">
+              <div class="code-art">
+                <div class="code-heading">
+                  <span>Abbreviated source excerpt</span>
+                  <span>C# · RulesCore</span>
+                </div>
+                <pre role="region" tabindex="0" aria-label="Abbreviated C# excerpt from TomeStack: dependency ordering; dependent updates omitted"><code>// Excerpt: dependent updates omitted
+var ready = new SortedSet&lt;int&gt;(
+    Specs.Where(s =&gt; incoming[s.Id] == 0)
+         .Select(s =&gt; SpecIndex[s.Id]));
+while (ready.Count &gt; 0) {
+    var id = Specs[ready.Min].Id;
+    ready.Remove(ready.Min); order.Add(id);
+    // Update and enqueue dependent nodes.
+}
+return order.Count == Specs.Count ? order
+    : throw new InvalidOperationException(
+        "Dependency cycle survived cycle removal.");</code></pre>
+                <a class="source-proof" href="https://github.com/firegiant9000/TomeStack/blob/66d5515/src/RulesCore/Calculation.cs#L2011-L2042" rel="noopener noreferrer" target="_blank">Inspect the complete algorithm <span aria-hidden="true">↗</span></a>
+                <p class="artifact-caption">Abbreviated source excerpt. Declaration-index tie breaks keep ordering deterministic; the full linked method updates dependent nodes.</p>
+              </div>
+              <div class="card-body">
+                <span class="kind">Solo / Windows Desktop / .NET</span>
+                <h3 id="tome-title">TomeStack</h3>
+                <p>A Windows tabletop character builder where each derived value can show the rule, source page, and character choice behind it. Offline-first, with a Windows installer linked under Releases.</p>
+                <p class="card-decision"><strong>Hard part:</strong> derived statistics (a character’s numbers) must stay understandable when imported and custom game effects interact. <strong>Decision:</strong> declarative effects, a dependency-ordered graph with cycle detection, and source-cited traces.</p>
+                <p class="card-fact">Solo build · .NET 10, React, SQLite · current release linked below</p>
+                <p class="card-proof">The test suites check calculated values and their source-cited traces; property tests cover formulas and serialization. CI includes Windows builds and a desktop smoke test. </p>
+                <div class="card-actions">
+                  <a href="https://github.com/firegiant9000/TomeStack" rel="noopener noreferrer" target="_blank">Source <span aria-hidden="true">↗</span></a>
+                  <a href="https://github.com/firegiant9000/TomeStack/releases" rel="noopener noreferrer" target="_blank">Installer <span aria-hidden="true">↗</span></a>
+                  <a href="https://github.com/firegiant9000/TomeStack/tree/main/docs/decisions" rel="noopener noreferrer" target="_blank">Architecture decisions <span aria-hidden="true">↗</span></a>
+                  <a href="https://github.com/firegiant9000/TomeStack/blob/main/docs/media/calculation-trace.png" rel="noopener noreferrer" target="_blank">Real feature screenshot <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+            <article aria-labelledby="fair-title" class="project-card">
+              <div class="code-art fair-code">
+                <div class="code-heading">
+                  <span>Condensed from SeatHoldService</span>
+                  <span>Java · Spring Boot</span>
+                </div>
+                <pre role="region" tabindex="0" aria-label="Condensed Java excerpt from FairTix: sorted seat lock acquisition"><code>// De-duplicate and sort for consistent lock
+// ordering (deadlock prevention)
+List&lt;UUID&gt; sortedIds = seatIds.stream()
+    .distinct().sorted().toList();
+
+// Enforce configurable max seats per hold
+// before acquiring any locks
+if (sortedIds.size() &gt; maxSeatsPerHold) {
+  throw new IllegalArgumentException(/* … */);
+}
+// Lock all seats in one batch query —
+// ORDER BY s.id matches our sort above
+List&lt;Seat&gt; lockedSeats = seatRepository
+    .findAndLockByIdIn(sortedIds);</code></pre>
+                <a class="source-proof" href="https://github.com/firegiant9000/FairTix/blob/0e20e5b/backend/src/main/java/com/fairtix/inventory/application/SeatHoldService.java#L123-L133" rel="noopener noreferrer" target="_blank">See the full seat-hold code <span aria-hidden="true">↗</span></a>
+                <p class="artifact-caption">Condensed: lines are re-wrapped and the exception message is elided. The linked range shows the original.</p>
+              </div>
+              <div class="card-body">
+                <span class="kind">Six-Person Team / Backend</span>
+                <h3 id="fair-title">FairTix</h3>
+                <p>Java 21 / Spring Boot concert-ticketing prototype using PostgreSQL row locks, Redis waiting rooms, fraud checks, and verified payment webhooks. Runs locally; not production-deployed.</p>
+                <p class="card-decision"><strong>Hard part:</strong> preventing overlapping seat reservations under contention. <strong>Decision:</strong> lock Postgres seat rows in sorted ID order; use Redis for the queue and fraud-velocity signals, not seat ownership.</p>
+                <p class="card-fact">My part: the queue and fraud packages and substantial backend implementation across inventory, auth, and payments. Teammates are credited in the repo; Stripe support is off by default.</p>
+                <p class="card-proof">Recorded contention experiment: 200 hold requests from 200 users for 50 seats, drained by 9 to 20 concurrent workers on PostgreSQL 16, across four runs without a double-hold or double-sale. <a href="https://github.com/firegiant9000/FairTix/blob/main/docs/experiments/l1-contention-correctness.md" rel="noopener noreferrer" target="_blank">Read the test setup and results</a>. Same-user purchase-cap and queue-capacity races were corrected in changes merged November 2026, using PostgreSQL advisory locks and forced-overlap integration tests. Multi-instance behavior remains untested.</p>
+                <div class="card-actions">
+                  <a href="https://github.com/firegiant9000/FairTix" rel="noopener noreferrer" target="_blank">Source and credits <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+            <article aria-labelledby="hacker-title" class="project-feature">
+              <div class="featured-copy">
+                <div class="project-label">
+                  <span class="kind">Security / Threat Intelligence</span>
+                  <span class="team-size">Six-Person Capstone</span>
+                </div>
+                <h3 id="hacker-title">Hacker Tracker</h3>
+                <p class="project-summary">Asset-aware threat intelligence: match installed software against NVD, KEV and EPSS so teams know what to fix first.</p>
+                <p>Version-aware asset matching combines NVD CVEs with CISA KEV and EPSS. A pilot backend runs on Render. The README now includes five real screenshots from a local demonstration using synthetic data and a Firebase Auth emulator; the authenticated dashboard is not offered here as an open public demo.</p>
+                <div class="decision">
+                  <strong>Hard part</strong>
+                  <p>Turning inconsistent software identifiers and noisy feeds into a useful, explainable risk picture.</p>
+                  <strong>My part</strong>
+                  <p>I built the version-aware CPE-to-CVE matcher with confidence tiers, EPSS ingestion, a read-only Go agent for Linux hosts, and supporting CI. The six-person team also built KEV ingestion, reporting, and UI work; contributions are documented in the repository.</p>
+                </div>
+                <div class="tag-list">
+                  <span>FastAPI</span>
+                  <span>React</span>
+                  <span>PostgreSQL</span>
+                  <span>Go</span>
+                  <span>EPSS / KEV</span>
+                </div>
+                <a class="text-link" href="https://github.com/firegiant9000/Senior-Cybersecurity-Project" rel="noopener noreferrer" target="_blank">Read the project and team credits <span aria-hidden="true">↗</span></a>
+                <p class="hacker-gallery"><a href="https://github.com/firegiant9000/Senior-Cybersecurity-Project/tree/main/docs/screenshots" rel="noopener noreferrer" target="_blank">View all five authentic project screenshots <span aria-hidden="true">↗</span></a></p>
+              </div>
+              <div class="pipeline">
+                <div aria-label="Actual Hacker Tracker flow: a read-only Go host agent produces software inventory; version-aware CPE matching (high / medium / low / needs-review confidence) connects assets to CVEs; CISA KEV and EPSS enrich the results; prioritized risk is shown in the executive report." class="pipeline-diagram" role="img">
+                  <div class="pipeline-top">
+                    <span>Hacker Tracker / System Overview</span>
+                  </div>
+                  <div class="pipeline-stack">
+                    <div class="pipeline-node">
+                      <span class="node-id">A</span>
+                      <span>Go host agent</span>
+                      <small>Read-only inventory</small>
+                    </div>
+                    <span aria-hidden="true" class="pipeline-arrow">↓</span>
+                    <div class="pipeline-node">
+                      <span class="node-id">B</span>
+                      <span>CPE → CVE matcher</span>
+                      <small>Version-aware · high / medium / low / needs-review</small>
+                    </div>
+                    <span aria-hidden="true" class="pipeline-arrow">↓</span>
+                    <div class="pipeline-node node-enrichment">
+                      <span class="node-id">C</span>
+                      <span>KEV + EPSS enrichment</span>
+                      <small>Known exploitation · likelihood</small>
+                    </div>
+                    <span aria-hidden="true" class="pipeline-arrow">↓</span>
+                    <div class="pipeline-node node-output">
+                      <span class="node-id">D</span>
+                      <span>Risk prioritization</span>
+                      <small>Executive report / recommendations</small>
+                    </div>
+                  </div>
+                </div>
+                <p class="pipeline-note"><strong>Regression gate.</strong> Known-good matcher fixtures run in CI on matcher changes and nightly, with a 95% pass threshold. This detects regression against the fixtures; it does not establish real-world matching accuracy.</p>
+                <p class="pipeline-note"><strong>Known limitation.</strong> Distro package revisions and one-sided epochs are conservatively marked needs-review instead of being treated as reliable upstream version comparisons; distro advisory matching is not implemented.</p>
+              </div>
+            </article>
+            <article aria-labelledby="plan-title" class="project-card">
+              <div class="code-art plan-code">
+                <div class="code-heading">
+                  <span>Condensed from a migration</span>
+                  <span>SQL · Supabase</span>
+                </div>
+                <pre role="region" tabindex="0" aria-label="Condensed SQL excerpt from PlanPal: migration that makes friend connections read-only to end users"><code>-- friend_connections: read-only to end users.
+--
+-- The core schema granted `authenticated`
+-- INSERT, UPDATE and DELETE here, guarded by
+-- party-based policies that constrain who a
+-- row names but not its `status`. [...]
+-- `users_select_self_or_friends` trusts
+-- `status = 'accepted'` [...]
+
+revoke insert, update, delete
+  on public.friend_connections
+  from public, anon, authenticated;
+
+drop policy friend_conn_insert_requester
+  on public.friend_connections;
+-- [two more write policies dropped]</code></pre>
+                <a class="source-proof" href="https://github.com/firegiant9000/PlanPal/blob/dd73911/supabase/migrations/20260930000001_friend_connections_read_only.sql#L1-L28" rel="noopener noreferrer" target="_blank">Read the full migration <span aria-hidden="true">↗</span></a>
+                <p class="artifact-caption">Condensed: comment lines are re-wrapped and bracketed notes mark omissions. The same commit adds grant and policy tests.</p>
+              </div>
+              <div class="card-body">
+                <span class="kind">Two-Person Project / Privacy</span>
+                <h3 id="plan-title">PlanPal</h3>
+                <p>Calendar app with a planned one-way sharing layer. Calendar and recurrence features work today; friend sharing has schema and read policies, but its request/accept API and UI are not yet implemented.</p>
+                <p class="card-decision"><strong>Hard part:</strong> designing availability sharing without exposing private event details. <strong>Decision:</strong> row-level security on ten public tables, service-role-only tables, generated OpenAPI client types, and commit-SHA checks on staging deployments.</p>
+                <p class="card-fact">My part: the API contract, schema and row-level security, web client, CI, and work across the mobile client and recurrence package. My teammate built the initial recurrence flow, early mobile calendar views, and screenshot-import pipeline.</p>
+                <p class="card-proof">Security lesson: I found and closed a row-level security policy gap that allowed a friendship status to be self-accepted; the change removed direct client writes and added policy/grant regression tests.</p>
+                <p class="card-offline">The web and mobile clients share a typed API contract; the repository includes local setup instructions and deployment checks. No public demo is linked.</p>
+                <div class="card-actions">
+                  <a href="https://github.com/firegiant9000/PlanPal" rel="noopener noreferrer" target="_blank">Source and scope <span aria-hidden="true">↗</span></a>
+                  <a href="https://github.com/firegiant9000/PlanPal/blob/main/docs/media/calendar-month.png" rel="noopener noreferrer" target="_blank">Month-view screenshot <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section aria-labelledby="contact-title" class="contact section" id="contact">
+        <div class="wrap contact-layout">
+          <div>
+            <h2 id="contact-title">
+       Contact
+      </h2>
+            <p>
+       Available for .NET backend and full-stack roles, remote in the U.S. or around Lafayette, Louisiana.
+      </p>
+            <a class="button button-lime" href="mailto:arlo.kharod@gmail.com">
+       Email me
+       <span aria-hidden="true">
+        ↗
+       </span>
+            </a>
+            <p class="contact-email">Reach me at <a href="mailto:arlo.kharod@gmail.com">arlo.kharod@gmail.com</a>.</p>
+          </div>
+          <div class="contact-panel">
+            <p>Where to find my work</p>
+            <a href="assets/Arlo-Kharod-Resume.pdf" download="Arlo-Kharod-Resume.pdf">
+              <span>Download résumé (PDF)</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a href="https://github.com/firegiant9000" rel="noopener noreferrer" target="_blank">
+              <span>
+        GitHub
+       </span>
+              <span aria-hidden="true">
+        ↗
+       </span>
+            </a>
+            <a href="https://www.linkedin.com/in/arlo-k-16a618273/" rel="noopener noreferrer" target="_blank">
+              <span>
+        LinkedIn
+       </span>
+              <span aria-hidden="true">
+        ↗
+       </span>
+            </a>
+            <a href="mailto:arlo.kharod@gmail.com">
+              <span>
+        Email
+       </span>
+              <span aria-hidden="true">
+        ↗
+       </span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <span>
+     © 2026 Arlo Kharod
+    </span>
+        <span>
+     Static HTML and CSS · no framework, tracking, or external fonts
+    </span>
+        <a href="#top">
+     Back to top ↑
+    </a>
+      </div>
+    </footer>
+  </body>
+</html>

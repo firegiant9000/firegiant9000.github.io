@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#11192d">
+  <meta name="description" content="Case study: per-patient order locking built with ASP.NET Core, managed SignalR and React on a single-instance API. Architecture, verification, collaboration and limitations.">
+  <link rel="canonical" href="https://firegiant9000.github.io/case-studies/order-locking.html">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Order-locking engineering case study | Arlo Kharod</title>
+  <meta property="og:title" content="Order-locking engineering case study | Arlo Kharod">
+  <meta property="og:description" content="How a single-instance healthcare API used patient-level locking, SignalR and server-side conflict checks — plus what peer review found.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://firegiant9000.github.io/case-studies/order-locking.html">
+  <meta property="og:image" content="https://firegiant9000.github.io/assets/og.png">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav-inner">
+      <a class="identity" href="../index.html#top"><span class="identity-mark" aria-hidden="true">ak<span>.</span></span><span class="identity-label">Arlo Kharod</span></a>
+      <nav class="nav-links" aria-label="Site navigation">
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="../assets/Arlo-Kharod-Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé (PDF)</a>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="case-header">
+      <div class="wrap case-heading">
+        <a href="../index.html#experience" class="case-back">← Back to experience</a>
+        <p class="eyebrow on-dark">Engineering case study · Adaptive Software LLC</p>
+        <h1>Per-patient order locking on a single-instance API</h1>
+        <p class="case-lead">Staff were colliding on the same patient: duplicate orders, conflicting orders and edits overwriting one another. I designed and primarily implemented a patient-level lock and presence workflow across the API and UI.</p>
+        <div class="case-meta"><span>Shipped April 2026</span><span>C# / ASP.NET Core</span><span>Managed SignalR</span><span>React / TypeScript</span></div>
+      </div>
+    </section>
+    <article class="wrap case-content" aria-label="Order-locking engineering case study">
+      <nav class="case-toc" aria-label="Case study sections">
+        <strong>In this case study</strong>
+        <a href="#problem">Problem</a><a href="#architecture">Design &amp; architecture</a><a href="#lifecycle">Lifecycle &amp; recovery</a><a href="#collaboration">Peer review</a><a href="#validation">Validation &amp; outcome</a><a href="#limits">Limits &amp; improvements</a>
+      </nav>
+      <div class="case-prose">
+        <section id="problem" aria-labelledby="problem-title">
+          <h2 id="problem-title">The problem</h2>
+          <p>On a medical-equipment ordering platform, staff sometimes opened the same patient chart simultaneously. They reported duplicate orders, conflicting orders and edits overwriting one another. The UI did not show that a colleague was already working on that patient.</p>
+          <p>I keyed the lock by <strong>patient</strong> rather than order because two of those collisions happen during order creation, before an order record exists.</p>
+        </section>
+        <section id="architecture" aria-labelledby="architecture-title">
+          <h2 id="architecture-title">Design &amp; architecture</h2>
+          <figure class="case-figure" aria-labelledby="figure-caption">
+            <div class="case-flow">
+              <div class="case-flow-item"><small>Browser</small><strong>React chart and order form</strong><span>Presence, lock request, heartbeat</span></div>
+              <span class="case-flow-arrow" aria-hidden="true">→</span>
+              <div class="case-flow-item"><small>Managed realtime</small><strong>SignalR connection &amp; hub</strong><span>Patient group and status notifications</span></div>
+              <span class="case-flow-arrow" aria-hidden="true">→</span>
+              <div class="case-flow-item"><small>One API instance</small><strong>In-memory lock registry</strong><span>One lock per patient; connection owner</span></div>
+              <span class="case-flow-arrow case-flow-arrow-down" aria-hidden="true">↓</span>
+              <div class="case-flow-item case-flow-write"><small>Write path</small><strong>Order API → SQL database</strong><span>409 Conflict if another user holds the lock</span></div>
+            </div>
+            <figcaption id="figure-caption">Simplified diagram of an anonymized design. SignalR transported events; lock ownership lived inside one API process, not the managed SignalR service.</figcaption>
+          </figure>
+          <p>The feature had three components:</p>
+          <ul>
+            <li><strong>Presence:</strong> opening a chart joined a SignalR group so staff could see who else was viewing it.</li>
+            <li><strong>Lock registry:</strong> a singleton in the API process stored one lock per patient, including its owning connection. A check-and-set inside one mutex kept two simultaneous acquires from both succeeding. The form requested a lock before opening.</li>
+            <li><strong>Server conflict checks:</strong> create, update and submit endpoints checked the registry. If another user held the lock, the API returned HTTP 409. This prevented conflict even when a client missed a realtime notification.</li>
+          </ul>
+        </section>
+        <section id="lifecycle" aria-labelledby="lifecycle-title">
+          <h2 id="lifecycle-title">Lock lifecycle and recovery</h2>
+          <p>Locks were released on leaving the order form or chart, switching patients or disconnecting. Because a browser can disappear without sending a clean disconnect, the client sent a heartbeat every 15 seconds; a background sweep every 30 seconds released connections silent for 45 seconds. A server-checked administrative permission allowed force-release with a notification to the previous holder.</p>
+          <p>A 30-minute maximum age allowed another user to take over an old lock, with a notice to the previous holder. On reconnect, the client retried with backoff, rejoined the patient group and requested its lock again. The server could transfer ownership when the same user returned on a new connection; otherwise the client displayed that the lock was lost.</p>
+          <p>An API restart cleared the in-memory registry. A heartbeat from an unknown connection triggered a rejoin flow so the client could rebuild presence and request a lock without reloading the page.</p>
+        </section>
+        <section id="collaboration" aria-labelledby="collaboration-title">
+          <h2 id="collaboration-title">Peer review changed the implementation</h2>
+          <p>I designed the first version and was its primary API and UI implementer, but the final feature was a team effort. The day after my initial commits, a teammate identified race conditions and lock leaks: several release paths had not been synchronized and leaving a chart could retain a lock. We resolved some issues together; the teammate implemented other fixes, including the restart rejoin signal and client reconnect/dialog corrections. Those fix commits belong to them.</p>
+          <p>Another teammate later added the conflict check to a fourth write endpoint, and QA ran the manual acceptance pass. About a week after the first implementation, I added the 30-minute cap, corrected further client connection lifecycle leaks and consolidated lock acquisition.</p>
+        </section>
+        <section id="validation" aria-labelledby="validation-title">
+          <h2 id="validation-title">Validation and observed outcome</h2>
+          <p>The feature was shipped in April 2026 and validated through peer review and <strong>manual QA</strong> using two users on one patient. QA covered competing access, closing a tab, a network drop, an administrative force-release and expiry. There were <strong>no automated tests</strong> for this feature at that time.</p>
+          <p>After release, I don't recall further reports of these collisions from staff. That is a qualitative observation, <strong>not a measured reduction</strong>: I have no ticket counts, before/after incident rate or other impact metric to support a numerical claim.</p>
+        </section>
+        <section id="limits" aria-labelledby="limits-title">
+          <h2 id="limits-title">Limits and what I'd improve</h2>
+          <ul>
+            <li><strong>Conflict prevention, not a mandatory lease:</strong> the API blocked a write when someone else held the lock; it did not require the writer to own a lock, and the guard and database write were not atomic. I'd enforce ownership and use a database row-version check as a backstop.</li>
+            <li><strong>Fixed maximum age:</strong> the 30-minute cap was checked during takeover, not renewed as a lease. I'd add a renewable lease with advance warning before expiration.</li>
+            <li><strong>Single instance:</strong> running more API instances would require shared atomic coordination through SQL or Redis. SignalR would remain the notification channel.</li>
+            <li><strong>Test coverage:</strong> I'd begin with unit tests for the registry, including simultaneous acquire attempts, lifecycle expiry, reconnect and administrative release, then add API-level conflict tests.</li>
+          </ul>
+          <p class="case-disclosure">This write-up uses an anonymized architecture and intentionally excludes customer/patient data, internal identifiers, privileged routes and production logs. It distinguishes my implementation from teammates' contributions.</p>
+        </section>
+        <div class="case-end-actions"><a class="case-link" href="../index.html#experience">← Return to experience</a><a class="case-link" href="../index.html#projects">Explore project code ↗</a></div>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><span>© 2026 Arlo Kharod</span><span>Technical case study · anonymized professional work</span><a href="#main">Back to top ↑</a></div></footer>
+</body>
+</html>
